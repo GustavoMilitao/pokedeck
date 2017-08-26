@@ -1,0 +1,149 @@
+﻿body {
+    background: url('http://www.wallpaperup.com/uploads/wallpapers/2012/10/21/20181/cad2441dd3252cf53f12154412286ba0.jpg');
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.container-menu {
+    padding: 16px;
+    max-width: 1012px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.header-logo-invertocat {
+    float: left;
+    margin: -1px 15px -1px -2px;
+    color: #fff;
+    white-space: nowrap;
+}
+
+.login-dp {
+    border-radius: 20px;
+    min-width: 80%;
+    min-height: 80%;
+    overflow: hidden;
+    position: relative !important;
+    background-color: rgba(255,255,255,.8);
+}
+
+    .login-dp .help-block {
+        font-size: 12px
+    }
+
+    .login-dp .bottom {
+        background-color: rgba(255,255,255,.8);
+        border-top: 1px solid #ddd;
+        clear: both;
+        padding: 14px;
+    }
+
+    .login-dp .social-buttons {
+        margin: 12px 0
+    }
+
+        .login-dp .social-buttons a {
+            width: 49%;
+        }
+
+    .login-dp .form-group {
+        margin-bottom: 10px;
+    }
+
+.btn-fb {
+    color: #fff;
+    background-color: #3b5998;
+}
+
+    .btn-fb:hover {
+        color: #fff;
+        background-color: #496ebc
+    }
+
+.btn-tw {
+    color: #fff;
+    background-color: #55acee;
+}
+
+    .btn-tw:hover {
+        color: #fff;
+        background-color: #59b5fa;
+    }
+
+
+@media(min-width:400px) and (max-width:600px) {
+    .login-dp {
+        width: 60% !important;
+        min-width: unset !important;
+        background-color: rgba(255,255,255,.8);
+    }
+
+        .login-dp .bottom {
+            background-color: rgba(255,255,255,.8);
+            border-top: 0 none;
+        }
+}
+
+@media(min-width:600px) and (max-width:767px) {
+    .login-dp {
+        width: 40% !important;
+        min-width: unset !important;
+        background-color: rgba(255,255,255,.8);
+    }
+
+        .login-dp .bottom {
+            background-color: rgba(255,255,255,.8);
+            border-top: 0 none;
+        }
+}
+
+
+@media(min-width:340px) and (max-width:399px) {
+    .login-dp {
+        width: 80% !important;
+        min-width: unset !important;
+        background-color: rgba(255,255,255,.8);
+    }
+
+        .login-dp .bottom {
+            background-color: rgba(255,255,255,.8);
+            border-top: 0 none;
+        }
+}
+
+.col-centered { 
+    margin: 5% auto !important;
+    float: none !important;
+}
+
+
+.login-dp .espacado {
+    padding: 14px 14px 0;
+}
+
+.login-dp h5 {
+    line-height:inherit;
+}
+
+footer p {
+    color:white;
+}

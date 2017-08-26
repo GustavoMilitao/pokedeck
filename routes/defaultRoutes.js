@@ -1,6 +1,6 @@
 'use strict';
 module.exports = function(app) {
-  var controller = require('../controllers/api/defaultController');
+  var controller = require('../controllers/mvc/defaultController');
 
   // todoList Routes
   app.route('/')
