@@ -15,17 +15,17 @@
 
 
 var app = angular.module('pokedeck', []);
-app.controller('loginCtrl', function ($scope, $http) {
+app.controller('loginCtrl', function ($scope, $http, $timeout) {
     $scope.form = {
-        login: "",
-        senha: "",
-        keeploggedin: false,
+        email: "",
+        password: ""
     };
+    $scope.shown = false;
     $scope.showAlert = function () {
-        $scope.myvalue = true;
+        $scope.shown = true;
     };
     $scope.hideAlert = function () {
-        $scope.myvalue = false;
+        $scope.shown = false;
     };
     $scope.submitForm = function () {
         $http({
@@ -35,16 +35,18 @@ app.controller('loginCtrl', function ($scope, $http) {
                 'Content-Type': "application/json"
               },
             data: {
-                user: $scope.form.user,
-                senha: $scope.form.senha
+                email: $scope.form.email,
+                password: $scope.form.password
             }
         })
             .then(function (success) {
                 if (success.data.success) {
-                    res.redirect('/home');
+                    redirectToHome($http);
                 } else {
-                    showAlert();
-                    setTimeout(function () { hideAlert(); }, 3000);
+                    $scope.showAlert();
+                    $timeout(function () { 
+                        $scope.hideAlert(); 
+                    }, 3000);
                 }
             }, function (error) {
                 alert(error);
@@ -53,6 +55,16 @@ app.controller('loginCtrl', function ($scope, $http) {
 
 });
 
+
+function redirectToHome($http){
+    $http({
+        method: "GET",
+        url: '/home',
+        headers: {
+            'Content-Type': "application/json"
+          }
+    });
+}
 
 function getCookie(cname) {
     var name = cname + "=";

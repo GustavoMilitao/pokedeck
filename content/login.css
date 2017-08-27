@@ -147,3 +147,7 @@ textarea {
 footer p {
     color:white;
 }
+
+.fonte-login-incorreto {
+    color: red;
+}

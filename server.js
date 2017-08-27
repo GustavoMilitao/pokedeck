@@ -38,6 +38,7 @@ var routesUser = require('./routes/userRoutes'); //importing route
 var routesTeam = require('./routes/teamRoutes'); //importing route
 var routesDefault = require('./routes/defaultRoutes'); //importing route
 var routesLogin = require('./routes/loginRoutes'); //importing route
+var routesHome = require('./routes/homeRoutes'); //importing route
 
 routesTeam(app); //register the route
 routesPokemon(app); //register the route
@@ -45,6 +46,7 @@ routesSkill(app); //register the route
 routesUser(app); //register the route
 routesDefault(app);
 routesLogin(app);
+routesHome(app);
 
 /*app.use(function(req, res) {
   res.status(404).send({url: req.originalUrl + ' not found'})

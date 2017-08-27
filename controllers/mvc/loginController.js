@@ -16,15 +16,17 @@ exports.default_page = function (req, res) {
 
 
 exports.login = function (req, res) {
-  var query = { user: req.body.user, senha: req.body.senha };
+  var query = { email: req.body.email, password: req.body.password };
   var user = User.find(query, function(err, result){
     if(err)
       res.send(err);
-    if(result && result != null){
+    var us = result[0];
+    if(us){
       var sess = req.session;
-      sess.user = result.__id;
+      sess.user = us.id;
+      res.send({ success : true });
     }else{
-      res.success = false;
+      res.send({ success : false });
     }
   });
 };
