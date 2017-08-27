@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html>
 <meta name="viewport" content="width=device-width" />
-<html ng-app>
+<html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
@@ -10,7 +10,7 @@
 </head>
 <body>
 <div class="body-content">
-<div class="row">
+<div class="row" ng-app="pokedeck">
     <div align="center" class="col-xs-12 col-sm-4 col-md-4 col-lg-3 col-centered">
         <div class="login-dp">
             <div class="col-md-12 col-sm-12 col-lg-12 espacado">
@@ -20,14 +20,14 @@
                     <a href="#" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>
                 </div>
                 <h4>ou</h4> 
-                <form class="form" href="#" accept-charset="UTF-8" id="login-form">
+                <form class="form" action="#" ng-controller="loginCtrl" ng-submit="submitForm()">
                     <div class="form-group">
                         <label class="sr-only" for="exampleInputEmail2">Email ou Apelido</label>
-                        <input type="email" class="form-control" id="user" placeholder="Email ou Apelido" required>
+                        <input type="email" ng-model="form.login" class="form-control" id="user" placeholder="Email ou Apelido" required>
                     </div>
                     <div class="form-group">
                         <label class="sr-only" for="exampleInputPassword2">Senha</label>
-                        <input type="password" class="form-control" id="password" placeholder="Senha" required>
+                        <input type="password" ng-model="form.senha" class="form-control" id="password" placeholder="Senha" required>
                         <div class="help-block text-right"><a href="">Esqueceu sua senha ?</a></div>
                     </div>
                     <div class="form-group">
@@ -35,7 +35,7 @@
                     </div>
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" id="keep-logged">
+                            <input type="checkbox" ng-model="form.keeploggedin" id="keep-logged">
                         </label>
                         <h5>Mantenha-me logado</h5>
                     </div>

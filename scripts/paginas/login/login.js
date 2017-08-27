@@ -1,45 +1,33 @@
-﻿$(document).ready(function () {
-    var cookie = getCookie('IDrinkSessionID');
-    if (cookie && cookie != "") {
-        $.ajax({
-            type: 'GET',
-            url: '/Login/Recover',
-            async: false,
-            data: {
-                sessionID: cookie
-            },
-            success: function (data) {
-
+﻿angular.module('pokedeck', [])
+    .controller('loginCtrl', [function () {
+        angular.element(document).ready(function () {
+            var cookie = getCookie('user');
+            var data = { user: cookie }
+            if (cookie && cookie != "") {
+                $http.get('/Login/Recover',
+                    JSON.stringify(data))
+                    .success(function () {
+                        // redirect to home page
+                    });
             }
         });
-    }
-});
+    }]);
 
 
-$('#login-form').submit(function (e) {
-    $.ajax({
-        type: 'POST',
-        url: '/Login',
-        async: false, 
-        data: {
-            user: $('#user').val(),
-            senha: $('#password').val(),
-            keepLogged: $('#keep-logged').prop('checked') 
-        }, 
-        success: function (data){
-            if (data.success) {
-                setCookie("IDrinkSessionID", data.sessionID, data.days);
-                // Store cookie
-                //Redirect to page
-            } else {
-                alert(data.message);
-            }
-        },
-        error: function (data){
-            alert(data.message);
-        }
-    });
-    e.preventDefault();
+var app = angular.module('pokedeck', []);
+app.controller('loginCtrl', function ($scope, $http) {
+    $scope.data = {
+        login: "",
+        senha: "",
+        keeploggedin: false,
+    };
+    $scope.submitForm = function () {
+        console.log("posting data....");
+        $http.post('/',
+            JSON.stringify($scope.data))
+            .success(function () {
+            });
+    };
 });
 
 
