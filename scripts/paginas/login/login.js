@@ -16,18 +16,41 @@
 
 var app = angular.module('pokedeck', []);
 app.controller('loginCtrl', function ($scope, $http) {
-    $scope.data = {
+    $scope.form = {
         login: "",
         senha: "",
         keeploggedin: false,
     };
+    $scope.showAlert = function () {
+        $scope.myvalue = true;
+    };
+    $scope.hideAlert = function () {
+        $scope.myvalue = false;
+    };
     $scope.submitForm = function () {
-        console.log("posting data....");
-        $http.post('/',
-            JSON.stringify($scope.data))
-            .success(function () {
+        $http({
+            method: "POST",
+            url: '/login',
+            headers: {
+                'Content-Type': "application/json"
+              },
+            data: {
+                user: $scope.form.user,
+                senha: $scope.form.senha
+            }
+        })
+            .then(function (success) {
+                if (success.data.success) {
+                    res.redirect('/home');
+                } else {
+                    showAlert();
+                    setTimeout(function () { hideAlert(); }, 3000);
+                }
+            }, function (error) {
+                alert(error);
             });
     };
+
 });
 
 

@@ -1,6 +1,6 @@
 'use strict';
 module.exports = function(app) {
-  var controller = require('../controllers/api/loginController');
+  var controller = require('../controllers/mvc/loginController');
   var defaultcontroller = require('../controllers/mvc/defaultController');
   // todoList Routes
   app.route('/login')
@@ -8,6 +8,6 @@ module.exports = function(app) {
     .post(controller.login);
 
   app.route('/register')
-    .get(defaultcontroller.register_page)
+    .get(controller.register_page)
     .post(controller.register);
 };

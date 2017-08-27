@@ -1,6 +1,7 @@
 'use strict';
 module.exports = function(app) {
   var controller = require('../controllers/api/pokemonController');
+  //var shared = require('./shared');
 
   // todoList Routes
   app.route('/pokemons')

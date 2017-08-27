@@ -1,7 +1,7 @@
 'use strict';
 module.exports = function(app) {
   var controller = require('../controllers/api/teamController');
-
+  //var shared = require('./shared');
   // todoList Routes
   app.route('/teams')
     .get(controller.list_all_teams)

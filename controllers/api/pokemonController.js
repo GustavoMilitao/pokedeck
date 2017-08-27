@@ -26,7 +26,7 @@ exports.create_a_pokemon = function(req, res) {
 
 
 exports.read_a_pokemon = function(req, res) {
-  Pokemon.findById(req.params.taskId, function(err, task) {
+  Pokemon.findById(req.params.pokemonId, function(err, task) {
     if (err)
       res.send(err);
     res.json(task);
