@@ -26,13 +26,12 @@ exports.create_a_user = function(req, res) {
 
 
 exports.read_a_user = function(req, res) {
-  User.findById(req.params.taskId, function(err, task) {
+  User.findById(req.params.userId, function(err, task) {
     if (err)
       res.send(err);
     res.json(task);
   });
 };
-
 
 exports.update_a_user = function(req, res) {
   User.findOneAndUpdate(

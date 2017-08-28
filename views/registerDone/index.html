@@ -14,11 +14,10 @@
     <div class="body-content">
         <div class="row" ng-app="pokedeck">
             <div align="center" class="col-xs-12 col-sm-4 col-md-4 col-lg-3 col-centered">
-                <form class="login-dp" ng-controller="homeCtrl">
-                    <h6 class="fonte-login-incorreto" ng-show="shown">Usuário ou senha inválidos</h6>
+                <form class="login-dp" ng-controller="registerDoneCtrl">
                     <div class="col-md-12 col-sm-12 col-lg-12 espacado">
-                        <h4>Olá {{form.user}}</h4>
-                        
+                        <h4>Usuário cadastrado com sucesso!</h4>
+                        <h6>Você será redirecionado para a tela de login</h4>
                     </div>
                 </form>
             </div>
@@ -29,7 +28,7 @@
     <script src="/scripts/bootstrap.js"></script>
     <script src="/scripts/respond.js"></script>
     <script src="/scripts/angular.min.js"></script>
-    <script src="/scripts/paginas/home/home.js"></script>
+    <script src="/scripts/paginas/registerDone/registerDone.js"></script>
 </body>
 
 </html>

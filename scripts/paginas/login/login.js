@@ -4,11 +4,8 @@
             var cookie = getCookie('user');
             var data = { user: cookie }
             if (cookie && cookie != "") {
-                $http.get('/Login/Recover',
-                    JSON.stringify(data))
-                    .success(function () {
-                        // redirect to home page
-                    });
+                sessionStorage.setItem("user",cookie);
+                window.location.href ="/home";
             }
         });
     }]);
@@ -41,7 +38,8 @@ app.controller('loginCtrl', function ($scope, $http, $timeout) {
         })
             .then(function (success) {
                 if (success.data.success) {
-                    redirectToHome($http);
+                    setCookie("user",success.data.user,365);
+                    window.location.href = "/home";
                 } else {
                     $scope.showAlert();
                     $timeout(function () { 
@@ -54,17 +52,6 @@ app.controller('loginCtrl', function ($scope, $http, $timeout) {
     };
 
 });
-
-
-function redirectToHome($http){
-    $http({
-        method: "GET",
-        url: '/home',
-        headers: {
-            'Content-Type': "application/json"
-          }
-    });
-}
 
 function getCookie(cname) {
     var name = cname + "=";

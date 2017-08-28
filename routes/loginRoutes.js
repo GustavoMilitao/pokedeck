@@ -10,4 +10,7 @@ module.exports = function(app) {
   app.route('/register')
     .get(controller.register_page)
     .post(controller.register);
+
+  app.route('/registerDone')
+    .get(controller.register_done_page)
 };
