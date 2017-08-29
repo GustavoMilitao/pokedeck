@@ -5,11 +5,12 @@ var mongoose = require('mongoose'),
   Skill = mongoose.model('Skills');
 
 exports.list_all_skills = function(req, res) {
-  Skill.find({}, function(err, skill) {
-    if (err)
-      res.send(err);
-    res.json(skill);
-  });
+  var Pokedex = require('pokedex-promise-v2');
+  var P = new Pokedex();
+  P.getMovesList()
+  .then(function(response) {
+    res.send({ success : true, skills : response });
+  })
 };
 
 

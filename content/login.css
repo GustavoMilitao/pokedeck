@@ -92,7 +92,7 @@ textarea {
 
 @media(min-width:400px) and (max-width:600px) {
     .login-dp {
-        width: 60% !important;
+        width: 80% !important;
         min-width: unset !important;
         background-color: rgba(255,255,255,.8);
     }
@@ -105,7 +105,7 @@ textarea {
 
 @media(min-width:600px) and (max-width:767px) {
     .login-dp {
-        width: 40% !important;
+        width: 60% !important;
         min-width: unset !important;
         background-color: rgba(255,255,255,.8);
     }
@@ -151,3 +151,18 @@ footer p {
 .fonte-login-incorreto {
     color: red;
 }
+
+.espaco-baixo {
+    padding-bottom: 15px;
+}
+
+.margem-fluida {
+    margin-top:2%;
+}
+
+.skills-fluid {
+    margin: 2%;
+}
+
+.btn-glyphicon { padding:8px; background:#ffffff; margin-right:4px; }
+.icon-btn { padding: 1px 15px 3px 2px !important; border-radius:50px !important;}

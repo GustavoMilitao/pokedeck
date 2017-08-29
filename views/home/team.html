@@ -1,0 +1,85 @@
+<div ng-repeat="team in teams" id="newTeam" align="center" class="col-xs-12 col-sm-12 col-md-8 col-lg-4 col-centered">
+    <div class="row">
+        <form class="login-dp">
+            <div class="col-md-12 col-sm-12 col-lg-12 espacado">
+                <h5>Preencha as informações sobre o time</h5>
+                <div class="form-group">
+                    <label class="sr-only" for="exampleInputEmail2">Nome do time</label>
+                    <input type="email" ng-model="form.team" class="form-control" id="user" placeholder="Nome do time" required>
+                </div>
+                <div class="form-group">
+                    <label class="sr-only" for="exampleInputPassword2">Nome do Pokemon</label>
+                    <input type="text" class="form-control" name="pokemon-auto-complete" id="pokemon-auto-complete" ng-model="pokemonPartialName"
+                        ng-keyup="completePokemon(pokemonPartialName)" class="form-control" placeholder="Pesquise pokemons aqui">
+                    <ul class="list-group" ng-model="hideThisPokemon" ng-hide="hideThisPokemon">
+                        <a class="list-group-item" href="#" ng-click="insertLinePokemon(pokemonData)" ng-repeat="pokemonData in filterPokemon">
+                            {{pokemonData.name}}
+                        </a>
+                    </ul>
+                    <br>
+                    <ul class="list-group">
+                        <li class="list-group-item skills-fluid" ng-repeat="pokemon in team.pokemons">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4>
+                                        {{pokemon.name}}
+                                    </h4>
+                                </div>
+                                <div class="col-md-6 pull-right">
+                                    <!-- <a id="del-{{pokemon.name}}" ng-click="excluirPokemon({{pokemon.name}})" class="btn icon-btn btn-warning pull-right">
+                                        <span class="glyphicon btn-glyphicon glyphicon-remove img-circle text-warning">
+                                        </span>
+                                        Pokemon
+                                    </a> -->
+                                    <button ng-click="excluirPokemon({{pokemon.name}})" type="button" class="pull-right btn btn-warning btn-circle btn"><i class="glyphicon glyphicon-remove"></i></button>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <input type="text" class="form-control" name="skill-auto-complete" id="skill-auto-complete" ng-model="skillPartialName" ng-keyup="completeSkill(skillPartialName)"
+                                    class="form-control" placeholder="Pesquise skills aqui">
+                                <ul class="list-group skills-fluid" ng-model="hideThisSkill" ng-hide="hideThisSkill">
+                                    <a class="list-group-item" href="#" ng-click="insertLineSkill(skillData,pokemon)" ng-repeat="skillData in filterSkill">
+                                        {{skillData.name}}
+                                    </a>
+                                </ul>
+                                <br>
+                                <ul class="list-group">
+                                    <li class="list-group-item skills-fluid" ng-repeat="skill in pokemon.skills">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h4>
+                                                    {{skill.name}}
+                                                </h4>
+                                            </div>
+                                            <div class="col-md-6 pull-right">
+                                                <!-- <a id="del-{{skill.name}}-{{pokemon.name}}" ng-click="excluirSkill({{skill.name}},{{pokemon.name}})" class="btn icon-btn btn-warning pull-right">
+                                                        <span class="glyphicon btn-glyphicon glyphicon-remove img-circle text-warning">
+                                                        </span>
+                                                        Skill
+                                                    </a> -->
+                                                <button type="button" class="pull-right btn btn-warning btn-circle btn"><i class="glyphicon glyphicon-remove"></i></button>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-6 col-lg-6 espaco-baixo">
+                    <a type="submit" class="btn icon-btn btn-success">
+                    <span class="glyphicon btn-glyphicon glyphicon-floppy-disk img-circle text-success">
+                    </span>
+                    Salvar
+                </a>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6 col-lg-6 espaco-baixo">
+                    <a ng-click="cancelarTimePokemon()" class="btn icon-btn btn-warning"><span class="glyphicon btn-glyphicon glyphicon-remove img-circle text-warning"></span>Cancelar</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

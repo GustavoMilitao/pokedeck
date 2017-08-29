@@ -31,9 +31,11 @@
         "ejs": "^2.5.7",
         "express": "^4.15.4",
         "express-session": "^1.15.5",
+        "fs": "0.0.1-security",
         "mongoose": "^4.11.8",
         "openurl": "^1.1.1",
         "opn": "^5.1.0",
-        "path": "^0.12.7"
+        "path": "^0.12.7",
+        "pokedex-promise-v2": "^3.0.3"
     }
 }

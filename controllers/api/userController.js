@@ -26,10 +26,10 @@ exports.create_a_user = function(req, res) {
 
 
 exports.read_a_user = function(req, res) {
-  User.findById(req.params.userId, function(err, task) {
+  User.findById(req.params.userId, function(err, user) {
     if (err)
       res.send(err);
-    res.json(task);
+    res.send({ success: true, user : user});
   });
 };
 

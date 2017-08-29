@@ -2,10 +2,8 @@
     .controller('loginCtrl', [function () {
         angular.element(document).ready(function () {
             var cookie = getCookie('user');
-            var data = { user: cookie }
-            if (cookie && cookie != "") {
-                sessionStorage.setItem("user",cookie);
-                window.location.href ="/home";
+            if(cookie){
+                window.location.href = "/home";
             }
         });
     }]);

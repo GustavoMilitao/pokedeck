@@ -56,6 +56,7 @@ var path = require('path');
 
 app.use('/content',express.static(path.join(__dirname, 'content')));
 app.use('/scripts',express.static(path.join(__dirname, 'scripts')));
+app.use('/fonts',express.static(path.join(__dirname, 'fonts')));
 
 app.engine('html', require('ejs').renderFile);
 
