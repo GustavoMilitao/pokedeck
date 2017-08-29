@@ -7,13 +7,9 @@ var Team = new Schema({
     type: String,
     default: ""
   },
-  Name: {
+  name: {
     type: String,
     default: ""
-  },
-  pokemonCount: {
-    type: Number,
-    default: 0
   },
   pokemons: {
     type: Array,

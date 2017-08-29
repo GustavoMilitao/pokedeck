@@ -4,73 +4,109 @@ app.controller('homeCtrl', function ($scope, $http, $timeout, $templateCache, $c
 
     $scope.allSkills = [];
     $scope.allPokemons = [];
+    $scope.user = "";
     $scope.ready = false;
-    $scope.htmlTeam = "";
-    $scope.editandoTime = false;
-    $scope.index = 0;
-    $scope.team = {
-        idDiv: "",
-        name: "",
-        pokemons: []
-    }
-
     $scope.teams = [];
 
-    $scope.form = {
-        user: "",
-        teams: []
-    };
-    $scope.pokemonPartialName = "";
-    $scope.skillPartialName = "";
-    $scope.completePokemon = function (string) {
-        if (string && string != "") {
-            $scope.hideThisPokemon = false;
+    $scope.completePokemon = function (team) {
+        if (team.pokemonPartialName && team.pokemonPartialName != "") {
+            team.hideThisPokemon = false;
             var output = [];
             angular.forEach($scope.allPokemons.pokemons.results, function (pokemon) {
-                if (pokemon.name.toLowerCase().indexOf(string.toLowerCase()) >= 0) {
+                if (pokemon.name.toLowerCase().indexOf(team.pokemonPartialName.toLowerCase()) >= 0) {
                     output.push(pokemon);
                 }
             });
-            $scope.filterPokemon = output;
+            team.filterPokemon = output;
         } else {
-            $scope.hideThisPokemon = true;
+            team.hideThisPokemon = true;
         }
     }
-    $scope.insertLinePokemon = function (pokemonData) {
-        if ($scope.team.pokemons.length <= 5) {
-            if (contemPokemonNaLista(pokemonData.name, $scope.team.pokemons)) {
+    $scope.insertLinePokemon = function (team, pokemonData) {
+        if (team.pokemons.length <= 5) {
+            if (contemPokemonNaLista(pokemonData.name, team.pokemons)) {
                 alert(pokemonData.name + " já adicionado ao time. Escolha outro.");
             } else {
                 pokemonData.skills = [];
-                $scope.team.pokemons.push(pokemonData);
-                $scope.pokemonPartialName = "";
-                $scope.hideThisPokemon = true;
+                team.pokemons.push(pokemonData);
+                team.pokemonPartialName = "";
+                team.hideThisPokemon = true;
+                $http({
+                    method: "PUT",
+                    url: '/teams/' + team._id,
+                    headers: {
+                        'Content-Type': "application/json"
+                    },
+                    data: team
+                });
             }
         } else {
             alert("São permitidos apenas 6 pokemóns por time")
         }
     }
-    $scope.completeSkill = function (string) {
-        if (string && string != "") {
-            $scope.hideThisSkill = false;
+    $scope.excluirPokemon = function (team, pokemonName) {
+        var oldPokemons = team.pokemons.slice(0);
+        team.pokemons = removeFunction(team.pokemons, 'name', pokemonName);
+        $http({
+            method: "PUT",
+            url: '/teams/' + team._id,
+            headers: {
+                'Content-Type': "application/json"
+            },
+            data: team
+        })
+            .then(function (success) {
+                if (!success.data.success) {
+                    $scope.teams.pokemons = oldPokemons;
+                }
+            });
+    }
+    $scope.excluirSkill = function (team,pokemon, skillName) {
+        var oldSkills = pokemon.skills.slice(0);
+        pokemon.skills = removeFunction(pokemon.skills, 'name', skillName);
+        $http({
+            method: "PUT",
+            url: '/teams/' + team._id,
+            headers: {
+                'Content-Type': "application/json"
+            },
+            data : team
+        })
+            .then(function (success) {
+                if (!success.data.success) {
+                    pokemon.skills = oldSkills;
+                }
+            });
+    }
+    $scope.completeSkill = function (team) {
+        if (team.skillPartialName && team.skillPartialName != "") {
+            team.hideThisSkill = false;
             var output = [];
             angular.forEach($scope.allSkills.skills.results, function (skill) {
-                if (skill.name.toLowerCase().indexOf(string.toLowerCase()) >= 0) {
+                if (skill.name.toLowerCase().indexOf(team.skillPartialName.toLowerCase()) >= 0) {
                     output.push(skill);
                 }
             });
-            $scope.filterSkill = output;
+            team.filterSkill = output;
         } else {
-            $scope.hideThisSkill = true;
+            team.hideThisSkill = true;
         }
     }
-    $scope.insertLineSkill = function (skillData, pokemon) {
+    $scope.insertLineSkill = function (team, pokemon, skillData) {
         if (pokemon) {
             if (pokemon.skills.length <= 3) {
                 if (!contemSkillNaListaDoPokemon(skillData.name, pokemon)) {
                     pokemon.skills.push(skillData);
-                    $scope.skillPartialName = "";
-                    $scope.hideThisSkill = true;
+                    team.skillPartialName = "";
+                    team.hideThisSkill = true;
+                    $http({
+                        method: "PUT",
+                        url: '/teams/' + team._id,
+                        headers: {
+                            'Content-Type': "application/json"
+                        },
+                        data: team
+                    });
                 } else {
                     alert(skillData.name + " já adicionado às habilidades do "
                         + pokemon.name + ". Escolha outra.");
@@ -82,37 +118,10 @@ app.controller('homeCtrl', function ($scope, $http, $timeout, $templateCache, $c
             alert("Erro");
         }
     }
-
-    $scope.salvarTimePokemon = function () {
-        $scope.form.teams.push(
-            {
-                name: $scope.team.name,
-                pokemons: $scope.team.pokemons
-            }
-        );
-        $scope.team = {
-            idDiv: "",
-            name: "",
-            pokemons: []
-        }
-        // gravar no banco
-    }
-
-    $scope.cancelarTimePokemon = function () {
-        document.getElementById($scope.team.idDiv).remove();
-        $scope.index--;
-        $scope.editandoTime = false;
-        $scope.team = {
-            idDiv: "",
-            name: "",
-            pokemons: []
-        }
-    }
-
-    $scope.adicionarTime = function () {
+    $scope.excluirTime = function (team) {
         $http({
-            method: "POST",
-            url: '/teams',
+            method: "DELETE",
+            url: '/teams/' + team._id,
             headers: {
                 'Content-Type': "application/json"
             },
@@ -120,38 +129,47 @@ app.controller('homeCtrl', function ($scope, $http, $timeout, $templateCache, $c
         })
             .then(function (success) {
                 if (success.data.success) {
-                    // var el = document.getElementById('times');
-                    // angular.element(el).append($compile($scope.htmlTeam)($scope));
-                    // document.getElementById('newTeam').setAttribute('id', 'newTeam-' + success.data.id);
-
-                    $scope.teams.push({
-                        id: success.data.id,
-                        name: "",
-                        pokemons: []
-                    });
+                    $scope.teams = removeFunction($scope.teams, '_id', team._id);
                 }
             });
-        // // Criar time no banco.
-        // // id resultante será o id da nova guia de time.
-        // }else{
+    }
+    $scope.adicionarTime = function () {
+        var userId = getCookie("user");
+        $http({
+            method: "POST",
+            url: '/teams',
+            headers: {
+                'Content-Type': "application/json"
+            },
+            data: { idUser: userId }
+        })
+            .then(function (success) {
+                if (success.data.success) {
+                    $scope.teams.push(success.data.team);
+                }
+            });
+    }
+    $scope.atualizarNomeTime = function (team) {
+        $http({
+            method: "PUT",
+            url: '/teams/' + team._id,
+            headers: {
+                'Content-Type': "application/json"
+            },
+            data: team
+        });
+    }
 
-        // }
-        // if (!$scope.editandoTime) {
-
-        // } else {
-        //     alert("Termine a edição do time atual");
-        // }
-
-        var cookie = getCookie('user');
-        if (!cookie) {
-            window.location.href = "/";
-        } else {
-            getLoggedUser($http, $scope);
-            getPokemonsList($http, $scope);
-            getHTMLTeam($http, $scope);
-            getSkillsList($http, $scope);
-        }
-    });
+    var cookie = getCookie('user');
+    if (!cookie) {
+        window.location.href = "/";
+    } else {
+        getLoggedUser($http, $scope);
+        getPokemonsList($http, $scope);
+        getSkillsList($http, $scope);
+        getMyTeams($http, $scope);
+    }
+});
 
 function contemPokemonNaLista(nome, lista) {
     var contem = false;
@@ -171,15 +189,6 @@ function contemSkillNaListaDoPokemon(nome, pokemon) {
     return contem;
 }
 
-function getPokemonObjectByNameInList(nome, lista) {
-    var result = null;
-    angular.forEach(lista, function (pokemon) {
-        if (pokemon.name == nome)
-            result = pokemon;
-    });
-    return result;
-}
-
 function getLoggedUser($http, $scope) {
     var userId = getCookie("user");
     $http({
@@ -192,7 +201,7 @@ function getLoggedUser($http, $scope) {
     })
         .then(function (success) {
             if (success.data.success) {
-                $scope.form.user = success.data.user.user;
+                $scope.user = success.data.user.user;
                 $scope.ready = true;
             }
         });
@@ -224,13 +233,18 @@ function getSkillsList($http, $scope) {
         });
 }
 
-function getHTMLTeam($http, $scope) {
-    $http.get("/home/team", {
-    }).then(function (result) {
-        if (result.data.success) {
-            $scope.htmlTeam = result.data.partial;
-        }
-    });
+function getMyTeams($http, $scope) {
+    var userId = getCookie("user");
+    $http({
+        method: "GET",
+        url: '/users/' + userId + '/teams',
+        headers: {
+            'Content-Type': "application/json"
+        },
+    })
+        .then(function (success) {
+            $scope.teams = success.data.teams;
+        });
 }
 
 function getCookie(cname) {
@@ -247,6 +261,13 @@ function getCookie(cname) {
         }
     }
     return "";
+}
+
+function removeFunction(myObjects, prop, valu) {
+    return myObjects.filter(function (val) {
+        return val[prop] !== valu;
+    });
+
 }
 
 function setCookie(cname, cvalue, exdays) {

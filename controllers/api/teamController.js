@@ -17,10 +17,10 @@ exports.list_all_teams = function(req, res) {
 
 exports.create_a_team = function(req, res) {
   var new_team = new Team(req.body);
-  new_team.save(function(err, team) {
+  new_team.save(function(err, response) {
     if (err)
       res.send(err);
-    res.json(team);
+    res.send({success : true, team : response });
   });
 };
 
@@ -39,22 +39,20 @@ exports.update_a_team = function(req, res) {
       {_id: req.params.teamId}, 
       req.body, 
       {new: true}, 
-      function(err, team) {
+      function(err, response) {
     if (err)
       res.send(err);
-    res.json(team);
+    res.send({ success : true, team : response });
   });
 };
 
 
 exports.delete_a_team = function(req, res) {
-
-
   Team.remove({
     _id: req.params.teamId
   }, function(err, team) {
     if (err)
       res.send(err);
-    res.json({ message: 'Team successfully deleted' });
+    res.send({ success : true });
   });
 };

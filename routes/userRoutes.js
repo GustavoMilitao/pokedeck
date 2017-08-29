@@ -11,4 +11,7 @@ module.exports = function(app) {
     .get(controller.read_a_user)
     .put(controller.update_a_user)
     .delete(controller.delete_a_user);
+
+    app.route('/users/:userId/teams')
+    .get(controller.list_my_teams)
 };

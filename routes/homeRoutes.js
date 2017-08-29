@@ -6,10 +6,4 @@ module.exports = function(app) {
   // todoList Routes
   app.route('/home')
     .get(controller.home)
-
-    app.route('/home/team')
-    .get(controller.team)
-
-    app.route('/home/newPokemon')
-    .get(controller.team)
 };

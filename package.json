@@ -36,6 +36,7 @@
         "openurl": "^1.1.1",
         "opn": "^5.1.0",
         "path": "^0.12.7",
-        "pokedex-promise-v2": "^3.0.3"
+        "pokedex-promise-v2": "^3.0.3",
+        "sugar": "^2.0.4"
     }
 }
