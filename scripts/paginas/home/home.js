@@ -159,6 +159,10 @@ app.controller('homeCtrl', function ($scope, $http, $timeout, $templateCache, $c
             data: team
         });
     }
+    $scope.logout = function(){
+        setCookie('user',"",-1);
+        window.location.href="/";
+    }
 
     var cookie = getCookie('user');
     if (!cookie) {

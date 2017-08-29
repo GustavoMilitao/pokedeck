@@ -52,9 +52,6 @@ function registrarUsuario($scope, $http, $timeout){
         .then(function (success) {
             if (success.data.success) {
                 window.location.href = "/registerDone";
-                $timeout(function () { 
-                    window.location.href = "/";
-                }, 6000);
             }else{
                 $scope.usuarioJaCadastrado();
                 $timeout(function () { 

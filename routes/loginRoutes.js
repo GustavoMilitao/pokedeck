@@ -1,11 +1,16 @@
 'use strict';
 module.exports = function(app) {
   var controller = require('../controllers/mvc/loginController');
-  var defaultcontroller = require('../controllers/mvc/defaultController');
-  // todoList Routes
+
   app.route('/login')
-    .get(defaultcontroller.default_page)
+    .get(controller.default_page)
     .post(controller.login);
+
+    app.route('/')
+    .get(controller.default_page)
+
+  app.route('')
+    .get(controller.default_page)
 
   app.route('/register')
     .get(controller.register_page)

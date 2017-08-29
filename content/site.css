@@ -164,5 +164,11 @@ footer p {
     margin: 2%;
 }
 
+.btn-circle {
+    text-align: center;
+    font-size: 12px;
+    border-radius: 25px !important;
+  }
+
 .btn-glyphicon { padding:8px; background:#ffffff; margin-right:4px; }
 .icon-btn { padding: 1px 15px 3px 2px !important; border-radius:50px !important;}
