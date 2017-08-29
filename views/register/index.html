@@ -12,9 +12,10 @@
 
 <body>
     <div class="body-content">
-        <div class="row" ng-app="pokedeck">
+        <div class="row" ng-app="pokedeck" ng-cloak>
             <div align="center" class="col-xs-12 col-sm-4 col-md-4 col-lg-3 col-centered">
                 <form ng-submit="submitForm()" class="login-dp" ng-controller="registerCtrl">
+                    <h1>POKEDECK</h1>
                     <h6 class="fonte-login-incorreto" ng-show="usuarioCadastrado">Usuário já cadastrado</h6>
                     <h6 class="fonte-login-incorreto" ng-show="senhasDifer">Senhas diferem</h6>
                     <div class="col-md-12 col-sm-12 col-lg-12 espacado">
@@ -37,12 +38,12 @@
                         </div>
                         <div class="form-group">
                             <div class="row">
-                            <div class="col-md-6 col-sm-6 col-lg-6 espacado">
-                                <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
-                            </div>
-                            <div class="col-md-6 col-sm-6 col-lg-6 espacado">
-                                <button type="button" ng-click="telaLogin()" class="btn btn-primary btn-block">Voltar</button>
-                            </div>
+                                <div class="col-md-6 col-sm-6 col-lg-6 espacado">
+                                    <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-lg-6 espacado">
+                                    <button type="button" ng-click="telaLogin()" class="btn btn-primary btn-block">Voltar</button>
+                                </div>
                             </div>
                         </div>
                     </div>

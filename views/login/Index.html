@@ -12,9 +12,10 @@
 
 <body>
     <div class="body-content">
-        <div class="row" ng-app="pokedeck">
+        <div class="row" ng-app="pokedeck" ng-cloak>
             <div align="center" class="col-xs-12 col-sm-4 col-md-4 col-lg-3 col-centered">
                 <form ng-submit="submitForm()" class="login-dp" ng-controller="loginCtrl">
+                    <h1>POKEDECK</h1>
                     <h6 class="fonte-login-incorreto" ng-show="shown">Usuário ou senha inválidos</h6>
                     <div class="col-md-12 col-sm-12 col-lg-12 espacado">
                         <h4>Login</h4>

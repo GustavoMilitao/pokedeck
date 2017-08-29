@@ -8,14 +8,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/content/site.css">
     <link rel="stylesheet" type="text/css" href="/../../content/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/../../content/loading.css">
 </head>
 
 <body>
-    <div class="body-content" ng-app="pokedeck">
+    <div class="body-content" ng-app="pokedeck" ng-cloak>
         <div class="row" ng-controller="homeCtrl">
+            
             <div align="center" class="col-xs-12 col-sm-8 col-md-7 col-lg-5 col-centered">
                 <form class="login-dp">
-                    <div ng-show="!ready"> Carregando dados..</div>
+                    <div ng-show="!ready" class="container">
+                        <div class="row">
+                            <div id="loading" style="z-index:500">
+                                <ul class="bokeh">
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div ng-show="!ready"> Carregando dados..</div> -->
                     <div ng-show="ready" class="col-md-12 col-sm-12 col-lg-12 espacado">
                         <!-- <h4>Olá {{form.user}}</h4> -->
                         <button title="Sair" ng-click="logout()" type="button" class="pull-right btn btn-primary btn-circle btn">
@@ -60,13 +73,14 @@
                                                 </a>
                                     </ul>
                                     <br>
+                                    <h4 ng-show="team.pokemons.length > 0">Pokemons </h4>
                                     <ul class="list-group">
-                                        <li class="list-group-item skills-fluid" ng-repeat="pokemon in team.pokemons">
+                                        <li class="list-group-item team-background skills-fluid" ng-repeat="pokemon in team.pokemons">
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <h4>
+                                                    <h2 class="pokemon-name">
                                                         {{pokemon.name}}
-                                                    </h4>
+                                                    </h2>
                                                 </div>
                                                 <div class="col-md-6 pull-right">
                                                     <!-- <a id="del-{{pokemon.name}}" ng-click="excluirPokemon({{pokemon.name}})" class="btn icon-btn btn-warning pull-right">
@@ -74,25 +88,25 @@
                                                                 </span>
                                                                 Pokemon
                                                             </a> -->
-                                                    <button ng-click="excluirPokemon(team,pokemon.name)" type="button" class="pull-right btn btn-warning btn-circle btn"><i class="glyphicon glyphicon-remove"></i></button>
+                                                    <button title="Excluir pokemon" ng-click="excluirPokemon(team,pokemon.name)" type="button" class="pull-right btn btn-warning btn-circle btn"><i class="glyphicon glyphicon-remove"></i></button>
                                                 </div>
                                             </div>
                                             <br>
                                             <div class="row">
-                                                <input class="form-control" ng-model="team.skillPartialName" ng-keyup="completeSkill(team)" class="form-control" placeholder="Pesquise skills aqui">
-                                                <ul class="list-group skills-fluid" ng-model="team.hideThisSkill" ng-hide="team.hideThisSkill">
-                                                    <a class="list-group-item" href="" ng-click="insertLineSkill(team,pokemon,skillData)" ng-repeat="skillData in team.filterSkill">
-                                                                {{skillData.name}}
+                                                <input class="form-control" ng-model="pokemon.skillPartialName" ng-keyup="completeSkill(pokemon)" class="form-control" placeholder="Pesquise skills aqui">
+                                                <ul class="list-group skills-fluid" ng-model="pokemon.hideThisSkill" ng-hide="pokemon.hideThisSkill">
+                                                    <a class="list-group-item" href="" ng-click="insertLineSkill(team,pokemon,skillData)" ng-repeat="skillData in pokemon.filterSkill">
+                                                               {{skillData.name}}
                                                             </a>
                                                 </ul>
                                                 <br>
                                                 <ul class="list-group">
-                                                    <li class="list-group-item skills-fluid" ng-repeat="skill in pokemon.skills">
+                                                    <li class="list-group-item skill-item-style skills-fluid" ng-repeat="skill in pokemon.skills">
                                                         <div class="row">
                                                             <div class="col-md-6">
-                                                                <h4>
+                                                                <h3>
                                                                     {{skill.name}}
-                                                                </h4>
+                                                                </h3>
                                                             </div>
                                                             <div class="col-md-6 pull-right">
                                                                 <!-- <a id="del-{{skill.name}}-{{pokemon.name}}" ng-click="excluirSkill({{skill.name}},{{pokemon.name}})" class="btn icon-btn btn-warning pull-right">
@@ -100,7 +114,7 @@
                                                                                 </span>
                                                                                 Skill
                                                                             </a> -->
-                                                                <button ng-click="excluirSkill(team,pokemon,skill.name)" type="button" class="pull-right btn btn-warning btn-circle btn"><i class="glyphicon glyphicon-remove"></i></button>
+                                                                <button title="Excluir skill" ng-click="excluirSkill(team,pokemon,skill.name)" type="button" class="pull-right btn btn-warning btn-circle btn"><i class="glyphicon glyphicon-remove"></i></button>
                                                             </div>
                                                         </div>
                                                     </li>

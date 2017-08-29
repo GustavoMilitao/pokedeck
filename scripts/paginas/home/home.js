@@ -78,18 +78,18 @@ app.controller('homeCtrl', function ($scope, $http, $timeout, $templateCache, $c
                 }
             });
     }
-    $scope.completeSkill = function (team) {
-        if (team.skillPartialName && team.skillPartialName != "") {
-            team.hideThisSkill = false;
+    $scope.completeSkill = function (pokemon) {
+        if (pokemon.skillPartialName && pokemon.skillPartialName != "") {
+            pokemon.hideThisSkill = false;
             var output = [];
             angular.forEach($scope.allSkills.skills.results, function (skill) {
-                if (skill.name.toLowerCase().indexOf(team.skillPartialName.toLowerCase()) >= 0) {
+                if (skill.name.toLowerCase().indexOf(pokemon.skillPartialName.toLowerCase()) >= 0) {
                     output.push(skill);
                 }
             });
-            team.filterSkill = output;
+            pokemon.filterSkill = output;
         } else {
-            team.hideThisSkill = true;
+            pokemon.hideThisSkill = true;
         }
     }
     $scope.insertLineSkill = function (team, pokemon, skillData) {
@@ -97,8 +97,8 @@ app.controller('homeCtrl', function ($scope, $http, $timeout, $templateCache, $c
             if (pokemon.skills.length <= 3) {
                 if (!contemSkillNaListaDoPokemon(skillData.name, pokemon)) {
                     pokemon.skills.push(skillData);
-                    team.skillPartialName = "";
-                    team.hideThisSkill = true;
+                    pokemon.skillPartialName = "";
+                    pokemon.hideThisSkill = true;
                     $http({
                         method: "PUT",
                         url: '/teams/' + team._id,
@@ -160,6 +160,7 @@ app.controller('homeCtrl', function ($scope, $http, $timeout, $templateCache, $c
         });
     }
     $scope.logout = function(){
+        $scope.ready = false;
         setCookie('user',"",-1);
         window.location.href="/";
     }
@@ -206,7 +207,7 @@ function getLoggedUser($http, $scope) {
         .then(function (success) {
             if (success.data.success) {
                 $scope.user = success.data.user.user;
-                $scope.ready = true;
+                // $scope.ready = true;
             }
         });
 }
@@ -234,6 +235,7 @@ function getSkillsList($http, $scope) {
     })
         .then(function (success) {
             $scope.allSkills = success.data;
+            $scope.ready = true;
         });
 }
 
