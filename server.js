@@ -45,6 +45,6 @@ app.use('/fonts',express.static(path.join(__dirname, 'fonts')));
 
 app.engine('html', require('ejs').renderFile);
 
-require("openurl").open("http://localhost:"+port.toString()+"/");
+// require("openurl").open("http://localhost:"+port.toString()+"/");
 
 app.listen(port);
