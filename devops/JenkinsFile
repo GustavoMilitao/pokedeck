@@ -9,7 +9,7 @@
 				steps {
 					sh 'npm install'
 				}
-			}
+			} 
 			stage('Build Docker') {
 				steps {
 					sh './jenkins/scripts/test.sh'
