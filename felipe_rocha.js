@@ -1,3 +1,2 @@
-console('felipe_rocha');
-"testando !!! "
-"Resolvendo conflitos!!!"
+console.log('felipe_rocha');
+"Resolvendo conflito !!"
