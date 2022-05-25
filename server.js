@@ -48,3 +48,5 @@ app.engine('html', require('ejs').renderFile);
 // require("openurl").open("http://localhost:"+port.toString()+"/");
 
 app.listen(port);
+
+console.log('teste');
