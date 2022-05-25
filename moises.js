@@ -1,2 +1,2 @@
 console.log("Moisés")
-console.log("teste de conflito")
+console.log("teste")
